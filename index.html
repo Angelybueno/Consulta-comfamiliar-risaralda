@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consulta Comfamiliar Risaralda</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #f1f8e9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .container {
+      background-color: #ffffffdd;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      max-width: 700px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #00796b;
+      margin-bottom: 10px;
+    }
+
+    input, button {
+      padding: 12px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    button {
+      background-color: #00796b;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #e8f5e9;
+      border-left: 6px solid #388e3c;
+      display: none;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: #666;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Consulta de Servicios Comfamiliar</h1>
+    <p>Ingrese el <strong>código</strong> del servicio para ver los detalles:</p>
+    <input type="text" id="codigoInput" placeholder="Ej: 890232" />
+    <button onclick="buscar()">Buscar</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <footer>© 2025 Comfamiliar Risaralda · Todos los derechos reservados</footer>
+
+  <script>
+    // Datos embebidos desde tu JSON (con limpieza)
+    const datos = [
+      {
+        codigo: "890232",
+        area: "CEC",
+        descripcion: "CONSULTA DE PRIMERA VEZ POR ESPECIALISTA EN CIRUGÍA DE MAMA Y TUMORES DE TEJIDOS BLANDOS",
+        solicitud: "Se solicita la cita vía CAS 3135700"
+      },
+      {
+        codigo: "976500",
+        area: "CEC",
+        descripcion: "EXTRACCIÓN Y/O SONDA REEMPLAZO DE SONDA URETRAL",
+        solicitud: "Presencial en CEC de lunes a viernes de 08:00 a 04:00pm"
+      },
+      {
+        codigo: "931002",
+        area: "RMI",
+        descripcion: "TERAPIA CON ONDAS DE CHOQUE",
+        solicitud: "Horario: Lunes a Viernes de 8 a 12 y de 2 a 5"
+      },
+      {
+        codigo: "9084360",
+        area: "LABORATORIO",
+        descripcion: "TAMIZAJE ADN-PVH + CITOLOGÍA VAGINAL TUMORAL",
+        solicitud: "Sin cita previa"
+      },
+      {
+        codigo: "936600",
+        area: "CIRUGIA",
+        descripcion: "TRATAMIENTO MANIPULATIVO OSTEOPÁTICO PARA DESPLAZAR LÍQUIDOS DE TEJIDOS (BOMBA LINFÁTICA)",
+        solicitud: "A través del correo recepcioncirugia@comfamiliar.com"
+      }
+      // Puedes seguir agregando más entradas aquí si lo deseas
+    ];
+
+    function buscar() {
+      const codigo = document.getElementById("codigoInput").value.trim();
+      const resultadoDiv = document.getElementById("resultado");
+      const resultado = datos.find(item => item.codigo === codigo);
+
+      if (resultado) {
+        resultadoDiv.innerHTML = `
+          <h3>Resultado</h3>
+          <p><strong>Área:</strong> ${resultado.area}</p>
+          <p><strong>Descripción:</strong> ${resultado.descripcion}</p>
+          <p><strong>¿Cómo se solicita?:</strong> ${resultado.solicitud}</p>
+        `;
+      } else {
+        resultadoDiv.innerHTML = `<p style="color:red;">No se encontró el código ingresado.</p>`;
+      }
+
+      resultadoDiv.style.display = "block";
+    }
+  </script>
+</body>
+</html>
